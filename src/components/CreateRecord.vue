@@ -16,7 +16,6 @@
               id="input-1"
               v-model="form.amount"
               type="number"
-              placeholder="5.000"
               required
             ></b-form-input>
           </b-form-group>
@@ -29,12 +28,11 @@
             <b-form-input
               id="input-2"
               v-model="form.description"
-              placeholder="Masukkan Deskripsi"
-              required
+              placeholder="boleh diisi boleh tidak"
             ></b-form-input>
           </b-form-group>
 
-          <b-form-group
+          <!-- <b-form-group
             id="input-group-3"
             label="Kategori:"
             label-for="input-3"
@@ -45,8 +43,8 @@
               :options="categories"
               required
             ></b-form-select>
-          </b-form-group>
-<br>
+          </b-form-group> -->
+          <br />
           <b-button type="submit" variant="primary">Simpan</b-button>
           <!-- <b-button type="reset" variant="danger">Reset</b-button> -->
         </b-form>
@@ -56,11 +54,12 @@
 </template>
 
 <script>
+import axios from "../config/api.js";
 export default {
   data() {
     return {
       form: {
-        amount: "",
+        amount: "5000",
         description: "",
         category: null,
         checked: [],
@@ -77,7 +76,25 @@ export default {
   methods: {
     onSubmit(event) {
       event.preventDefault();
-      alert(JSON.stringify(this.form));
+      axios({
+        method: "POST",
+        data: {
+          data: [
+            {
+              amount: this.form.amount,
+              description: this.form.description,
+              created: Date.now()
+            },
+          ],
+        },
+      })
+        .then(({ data }) => {
+          // console.log(data);
+          alert("OK", data)
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
     onReset(event) {
       event.preventDefault();
