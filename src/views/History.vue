@@ -1,18 +1,14 @@
 <template>
   <div class="history-container">
-    History
-    <HistoryItem 
-      description="parkir"
-      amount="2000"
-       />
-    <HistoryItem 
-      description="parkir"
-      amount="2000"
-       />
-    <HistoryItem 
-      description="parkir"
-      amount="2000"
-       />
+    <h1>Rekam Jejak Pengeluaran</h1>
+    <hr>
+    <HistoryItem
+      v-for="historyItem in $store.state.history"
+      :key="historyItem.id"
+      :description="historyItem.description"
+      :amount="historyItem.amount"
+      :created="historyItem.created"
+    />
   </div>
 </template>
 
@@ -24,7 +20,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.history-container{
+.history-container {
+  padding-top: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;

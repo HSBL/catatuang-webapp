@@ -1,15 +1,15 @@
 <template>
   <b-card
-    title="Pengeluaran"
+    :title="description"
     tag="article"
     style="max-width: 20rem;"
     class="mb-2"
   >
     <b-card-text>
-      {{description}}
+      {{created}}
     </b-card-text>
 
-    <b-button href="#" variant="primary">Rp {{amount}},-</b-button>
+    <b-button href="#" variant="primary">Rp {{Number(amount).toLocaleString("id-ID")}},-</b-button>
   </b-card>
 </template>
 

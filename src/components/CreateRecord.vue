@@ -48,6 +48,11 @@
           <b-button type="submit" variant="primary">Simpan</b-button>
           <!-- <b-button type="reset" variant="danger">Reset</b-button> -->
         </b-form>
+        <div class="history-btn-container">
+          <button @click="toHistory" class="btn btn-info btn-sm">
+            History
+          </button>
+        </div>
       </div>
     </b-card>
   </div>
@@ -74,8 +79,12 @@ export default {
     };
   },
   methods: {
+    toHistory() {
+      this.$store.dispatch("fetchHistory");
+    },
     onSubmit(event) {
       event.preventDefault();
+      this.$store.commit("START_LOADING");
       axios({
         method: "POST",
         data: {
@@ -83,16 +92,16 @@ export default {
             {
               amount: this.form.amount,
               description: this.form.description,
-              created: Date.now()
+              created: new Date().toLocaleString(),
             },
           ],
         },
       })
-        .then(({ data }) => {
-          // console.log(data);
-          alert("OK", data)
+        .then(() => {
+          this.$store.commit("FINISH_LOADING");
         })
         .catch((err) => {
+          this.$store.commit("FINISH_LOADING");
           console.log(err);
         });
     },
@@ -113,6 +122,9 @@ export default {
 </script>
 
 <style>
+.history-btn-container {
+  text-align: right;
+}
 .card-container {
   justify-content: center;
   align-items: center;

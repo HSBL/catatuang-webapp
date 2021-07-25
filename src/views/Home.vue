@@ -1,8 +1,5 @@
 <template>
   <div class="home">
-    <div class="navigation">
-      <button @click="toHistory" class="btn btn-info btn-sm">History</button>
-    </div>
     <CreateRecord />
   </div>
 </template>
@@ -16,9 +13,6 @@ export default {
     CreateRecord,
   },
   methods: {
-    toHistory() {
-      this.$router.push("/history");
-    },
   },
 };
 </script>

@@ -4,7 +4,9 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div> -->
-    <router-view/>
+    <b-overlay :show="$store.state.isLoading" class="loading-overlay">
+      <router-view />
+    </b-overlay>
   </div>
 </template>
 
